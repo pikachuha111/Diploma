@@ -12,9 +12,13 @@ public class User {
 
     private String userId;
 
-    private String userName;
+    private String userName; // поле передается при логине
+
+    private String username; // поле после логина(в ответе)
 
     @SerializedName("password")
     private String userPassword;
+
+
 
 }

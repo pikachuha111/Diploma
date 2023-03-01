@@ -10,9 +10,24 @@ public class TestOne extends BaseApiTest {
 
     @Test
     public void testOne() {
-        userAdapter.logIn(User.builder()
-                .userName("nSolovev")
-                .userPassword("test!N_01")
-                .build());
+//        userAdapter.logIn();
+//        userAdapter.authorized();
+        userAdapter.generateToken();
+//        User.builder()
+//                .userName("nSolovev")
+//                .userPassword("test!N_01")
+//                .build()
+    }
+
+    @Test
+    public void deleteUser() {
+        userAdapter.deleteUser(
+                userAdapter.logIn(
+                        userAdapter.createUser()));
+    }
+
+    @Test
+    public void checkIT() {
+
     }
 }
