@@ -1,7 +1,7 @@
 package adapters;
 
 import io.restassured.mapper.ObjectMapperType;
-import models.User;
+import models.UserLogin;
 import org.apache.http.HttpStatus;
 import utils.EndPoints;
 
@@ -10,37 +10,38 @@ import java.io.File;
 import static io.restassured.RestAssured.given;
 
 public class UserAdapter {
-    private File userFile = new File("src/test/resources/user.json");
-    private File userNewFile = new File("src/test/resources/userOne.json");
+//    private File userFile = new File("src/test/resources/user.json");
 
-    public User createUser() {
+    public UserLogin createUser(UserLogin user) {
+
         return given()
-                .body(userNewFile)
+                .body(user, ObjectMapperType.GSON)
                 .when()
                 .post(EndPoints.CREATE_USER)
                 .then()
-                .statusCode(HttpStatus.SC_CREATED)
                 .log().body()
+                .statusCode(HttpStatus.SC_CREATED)
                 .extract()
-                .as(User.class, ObjectMapperType.GSON);
+                .as(UserLogin.class, ObjectMapperType.GSON);
     }
 
-    public User logIn(User user) {
+    public UserLogin logIn(UserLogin user) {
 
         return given()
-                .body(userNewFile)
+                .body(user, ObjectMapperType.GSON)
+                .log().body()
                 .when()
                 .post(EndPoints.LOGIN_USER)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .log().body()
                 .extract()
-                .as(User.class, ObjectMapperType.GSON);
+                .as(UserLogin.class, ObjectMapperType.GSON);
     }
 
-    public void authorized() {
+    public void authorized(UserLogin user) {
         given()
-                .body(userFile)
+                .body(user, ObjectMapperType.GSON)
                 .when()
                 .post(EndPoints.AUTHORIZED_USER)
                 .then()
@@ -48,9 +49,9 @@ public class UserAdapter {
                 .log().body();
     }
 
-    public void generateToken() {
+    public void generateToken(UserLogin user) {
         given()
-                .body(userFile)
+                .body(user, ObjectMapperType.GSON)
                 .when()
                 .post(EndPoints.GENERATE_TOKEN_USER)
                 .then()
@@ -58,14 +59,14 @@ public class UserAdapter {
                 .log().body();
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(UserLogin user) {
         given()
-                .pathParams("uuid", user.getUserId())
+                .pathParams("uuid", user.getUserID())
                 .when()
                 .delete(EndPoints.DELETE_USER)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
-                .log().body();
+                .log().body()
+                .statusCode(HttpStatus.SC_OK);
 
     }
 
