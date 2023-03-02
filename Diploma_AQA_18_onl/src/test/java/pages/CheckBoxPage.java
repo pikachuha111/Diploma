@@ -7,13 +7,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class CheckBoxPage {
-    private String pagePath = "https://demoqa.com/checkbox";
 
-    public SelenideElement expandAll = $(".rct-icon-expand-all");
-
-    public void open() {
-        expandAll.click();
-    }
+    private SelenideElement expandAllButton = $(".rct-option-expand-all");
 
 
 }
