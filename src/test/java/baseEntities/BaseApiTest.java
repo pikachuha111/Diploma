@@ -1,12 +1,15 @@
 package baseEntities;
 
+import adapters.BooksAdapter;
 import adapters.UserAdapter;
 import configuration.ReadProperties;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import models.UserLogin;
+import models.CollectionBooks;
+import models.User;
 import org.apache.http.protocol.HTTP;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import java.io.File;
@@ -16,8 +19,10 @@ import static io.restassured.RestAssured.given;
 
 public class BaseApiTest {
     protected UserAdapter userAdapter;
-    protected UserLogin userLogin;
-    protected UserLogin actualUser;
+    protected BooksAdapter booksAdapter;
+    protected User user;
+    protected User actualUser;
+    protected CollectionBooks collectionBooks;
 
     @BeforeTest
     public void setupApi() {
@@ -25,28 +30,35 @@ public class BaseApiTest {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            userLogin = mapper.readValue(new File("src/test/resources/userOne.json"), UserLogin.class);
+            user = mapper.readValue(new File("src/test/resources/userOne.json"), User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(userLogin.toString()); // удалить
+//        System.out.println(userLogin.toString()); // удалить
 
         RestAssured.baseURI = ReadProperties.getUrl();
         RestAssured.requestSpecification = given()
                 .header(HTTP.CONTENT_TYPE, ContentType.JSON);
 
         userAdapter = new UserAdapter();
-        actualUser = userAdapter.createUser(userLogin);
+        booksAdapter = new BooksAdapter();
+        collectionBooks = new CollectionBooks();
+        userAdapter.createUser(user);
+        actualUser = userAdapter.logIn(user);
+//        userAdapter.generateToken(user);
 
         System.out.println(actualUser.toString());
 
         RestAssured.requestSpecification = given()
-                .auth().preemptive().basic(userLogin.getUserName(),userLogin.getPassword())
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON); // короче очень важно для того, чтобы
+                .auth().preemptive().basic(user.getUserName(), user.getPassword())
+                .header(HTTP.CONTENT_TYPE, ContentType.JSON); // *обязательно, тип формата передачи данных
 
     }
 
 
-//    @AfterTest
+    @AfterTest
+    public void tearDown() {
+//        userAdapter.deleteUser(actualUser); // почему то не удаляется пользователь, хотя при тех же степах в Postman и в Swagger сайта все получается
+    }
 }

@@ -1,18 +1,15 @@
 package adapters;
 
 import io.restassured.mapper.ObjectMapperType;
-import models.UserLogin;
+import models.User;
 import org.apache.http.HttpStatus;
 import utils.EndPoints;
-
-import java.io.File;
 
 import static io.restassured.RestAssured.given;
 
 public class UserAdapter {
-//    private File userFile = new File("src/test/resources/user.json");
 
-    public UserLogin createUser(UserLogin user) {
+    public User createUser(User user) {
 
         return given()
                 .body(user, ObjectMapperType.GSON)
@@ -22,10 +19,20 @@ public class UserAdapter {
                 .log().body()
                 .statusCode(HttpStatus.SC_CREATED)
                 .extract()
-                .as(UserLogin.class, ObjectMapperType.GSON);
+                .as(User.class, ObjectMapperType.GSON);
     }
 
-    public UserLogin logIn(UserLogin user) {
+    public void generateToken(User user) {
+        given()
+                .body(user, ObjectMapperType.GSON)
+                .when()
+                .post(EndPoints.GENERATE_TOKEN_USER)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    public User logIn(User user) {
 
         return given()
                 .body(user, ObjectMapperType.GSON)
@@ -36,10 +43,10 @@ public class UserAdapter {
                 .statusCode(HttpStatus.SC_OK)
                 .log().body()
                 .extract()
-                .as(UserLogin.class, ObjectMapperType.GSON);
+                .as(User.class, ObjectMapperType.GSON);
     }
 
-    public void authorized(UserLogin user) {
+    public void authorized(User user) {
         given()
                 .body(user, ObjectMapperType.GSON)
                 .when()
@@ -49,25 +56,27 @@ public class UserAdapter {
                 .log().body();
     }
 
-    public void generateToken(UserLogin user) {
+    public void getUser(User user) {
         given()
-                .body(user, ObjectMapperType.GSON)
+                .pathParams("uuid", user.getUserId())
                 .when()
-                .post(EndPoints.GENERATE_TOKEN_USER)
+                .get(EndPoints.GET_USER)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
-                .log().body();
+                .statusCode(HttpStatus.SC_OK);
     }
 
-    public void deleteUser(UserLogin user) {
+    public void deleteUser(User user) {
         given()
-                .pathParams("uuid", user.getUserID())
+                .pathParams("uuid", user.getUserId())
                 .when()
+                .log().all()
                 .delete(EndPoints.DELETE_USER)
                 .then()
                 .log().body()
                 .statusCode(HttpStatus.SC_OK);
 
     }
+
+
 
 }
