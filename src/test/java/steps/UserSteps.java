@@ -10,13 +10,15 @@ public class UserSteps {
     LoginPage loginPage = new LoginPage();
     ProfilePage profilePage = new ProfilePage();
 
-    public void registerNewUser(UserUI userUI) {
+    public void registerNewUser(UserUI userUI) throws InterruptedException {
         registerPage.goToRegisterPage();
+        Thread.sleep(3000);
         registerPage.getFirstNameInput().val(userUI.getFirstName());
         registerPage.getLastNameInput().val(userUI.getLastName());
         registerPage.getUserNameInput().val(userUI.getUserName());
         registerPage.getPasswordInput().val(userUI.getPassword());
-        registerPage.getRegisterButton().click();
+        Thread.sleep(10000);
+        registerPage.getRegisterButton().scrollTo().click();
     }
 
     public void loginUser(UserUI userUI) {

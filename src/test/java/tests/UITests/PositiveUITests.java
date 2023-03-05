@@ -8,17 +8,20 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CheckBoxPage;
+import pages.UploadPage;
 import pages.ModalDialogPage;
 import steps.UserSteps;
 
-import static com.codeborne.selenide.Condition.attribute;
+import java.io.File;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PositiveUITests extends BaseTestUI {
     CheckBoxPage checkBoxPage = new CheckBoxPage();
-    UserUI newUser = new UserUI();
     UserSteps userSteps = new UserSteps();
     ModalDialogPage modalDialogPage = new ModalDialogPage();
+    UploadPage uploadPage = new UploadPage();
 
     @Test
     public void popupMessageTest() {
@@ -36,30 +39,44 @@ public class PositiveUITests extends BaseTestUI {
         modalDialogPage.getCloseModalButton().click();
     }
 
-    @Test //Тест не проходит из-за капчи
-    public void registerNewUserTest() {
-        newUser.setFirstName(ReadPropertiesUI.firstName());
-        newUser.setLastName(ReadPropertiesUI.lastName());
-        newUser.setUserName(ReadPropertiesUI.userName());
-        newUser.setPassword(ReadPropertiesUI.password());
+    @Test
+    public void uploadFileTest() {
+        uploadPage.goToUploadPage();
+        uploadPage.getChooseFileButton().uploadFile(new File("D:\\Programms\\Diploma\\Diploma_AQA_18_onl\\src\\test\\resources\\witcher.jpg"));
+        $(By.id("uploadedFilePath"))
+                .shouldBe(visible)
+                .shouldHave(text("C:\\fakepath\\witcher.jpg"));
+    }
+
+    @Test
+    public void registerNewUserTest() throws InterruptedException {
+        UserUI newUser = UserUI.builder()
+                .firstName(ReadPropertiesUI.firstName())
+                .lastName(ReadPropertiesUI.lastName())
+                .userName(ReadPropertiesUI.userName())
+                .password(ReadPropertiesUI.password())
+                .build();
 
         userSteps.registerNewUser(newUser);
+        //капчу прохожу вручную
 
         String alertText = Selenide.switchTo().alert().getText();
         Assert.assertEquals(alertText, "User Register Successfully.");
         Selenide.switchTo().alert().accept();
     }
 
-    //т.к. из-за капчи я не могу создать пользователя в тестовом режиме,
-    @Test        // я создаю его вручную, а потом запускаю тест
-    public void deleteUserTest() {
-        newUser.setFirstName(ReadPropertiesUI.firstName());
-        newUser.setLastName(ReadPropertiesUI.lastName());
-        newUser.setUserName(ReadPropertiesUI.userName());
-        newUser.setPassword(ReadPropertiesUI.password());
+    @Test
+    public void deleteUserTest() throws InterruptedException {
+        UserUI newUser = UserUI.builder()
+                .firstName(ReadPropertiesUI.firstName())
+                .lastName(ReadPropertiesUI.lastName())
+                .userName(ReadPropertiesUI.userName())
+                .password(ReadPropertiesUI.password())
+                .build();
 
-//        userSteps.registerNewUser(newUser);
-//        Selenide.switchTo().alert().accept();
+        userSteps.registerNewUser(newUser);
+        //капчу прохожу вручную
+        Selenide.switchTo().alert().accept();
 
         userSteps.loginUser(newUser);
         userSteps.deleteUser();
