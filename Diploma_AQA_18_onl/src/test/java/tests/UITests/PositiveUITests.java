@@ -14,7 +14,7 @@ import steps.UserSteps;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 
-public class TestsUI extends BaseTestUI {
+public class PositiveUITests extends BaseTestUI {
     CheckBoxPage checkBoxPage = new CheckBoxPage();
     UserUI newUser = new UserUI();
     UserSteps userSteps = new UserSteps();
