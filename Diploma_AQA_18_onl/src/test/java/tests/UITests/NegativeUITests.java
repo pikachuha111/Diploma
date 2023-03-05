@@ -20,7 +20,7 @@ public class NegativeUITests extends BaseTestUI {
 
     @Test
     public void incorrectLoginTest() {
-        userUI.setUserName(ReadPropertiesUI.userName() + "f");
+        userUI.setUserName(ReadPropertiesUI.userName() + "аf");
         userUI.setPassword(ReadPropertiesUI.password());
 
         loginPage.goToLoginPage();
