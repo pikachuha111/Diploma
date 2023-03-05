@@ -30,12 +30,10 @@ public class BaseApiTest {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            user = mapper.readValue(new File("src/test/resources/userOne.json"), User.class);
+            user = mapper.readValue(new File("src/test/resources/testUser.json"), User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        System.out.println(userLogin.toString()); // удалить
 
         RestAssured.baseURI = ReadProperties.getUrl();
         RestAssured.requestSpecification = given()
@@ -46,19 +44,16 @@ public class BaseApiTest {
         collectionBooks = new CollectionBooks();
         userAdapter.createUser(user);
         actualUser = userAdapter.logIn(user);
-//        userAdapter.generateToken(user);
-
-        System.out.println(actualUser.toString());
 
         RestAssured.requestSpecification = given()
                 .auth().preemptive().basic(user.getUserName(), user.getPassword())
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON); // *обязательно, тип формата передачи данных
+                .header(HTTP.CONTENT_TYPE, ContentType.JSON);
 
     }
 
 
     @AfterTest
     public void tearDown() {
-//        userAdapter.deleteUser(actualUser); // почему то не удаляется пользователь, хотя при тех же степах в Postman и в Swagger сайта все получается
+        userAdapter.deleteUser(actualUser); // сам сайт при удалении пользователя возвращает 204, пользователь удаляется но это несоответсвие спеки swagger, на удивление postman отдает 200, если повторить те же действия
     }
 }

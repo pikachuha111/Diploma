@@ -24,7 +24,6 @@ public class BooksAdapter {
                 .when()
                 .get(EndPoints.GET_COLLECTION_BOOKS)
                 .then()
-//                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .as(CollectionBooks.class, ObjectMapperType.GSON);
@@ -61,7 +60,6 @@ public class BooksAdapter {
 
         given()
                 .body(user, ObjectMapperType.GSON)
-                .log().body()
                 .when()
                 .post(EndPoints.ADD_BOOKS)
                 .then()

@@ -22,15 +22,14 @@ public class UserAdapter {
                 .as(User.class, ObjectMapperType.GSON);
     }
 
-    public void generateToken(User user) {
-        given()
-                .body(user, ObjectMapperType.GSON)
-                .when()
-                .post(EndPoints.GENERATE_TOKEN_USER)
-                .then()
-                .log().body()
-                .statusCode(HttpStatus.SC_OK);
-    }
+//    public void generateToken(User user) {
+//        given()
+//                .body(user, ObjectMapperType.GSON)
+//                .when()
+//                .post(EndPoints.GENERATE_TOKEN_USER)
+//                .then()
+//                .statusCode(HttpStatus.SC_OK);
+//    }
 
     public User logIn(User user) {
 
@@ -69,11 +68,10 @@ public class UserAdapter {
         given()
                 .pathParams("uuid", user.getUserId())
                 .when()
-                .log().all()
                 .delete(EndPoints.DELETE_USER)
                 .then()
                 .log().body()
-                .statusCode(HttpStatus.SC_OK);
+                .statusCode(HttpStatus.SC_NO_CONTENT);
 
     }
 
