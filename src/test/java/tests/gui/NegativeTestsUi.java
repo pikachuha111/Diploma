@@ -1,6 +1,6 @@
-package tests.UITests;
+package tests.gui;
 
-import baseEntities.BaseTestUI;
+import baseEntities.BaseUiTest;
 import configuration.ReadPropertiesUI;
 import models.HumanUI;
 import models.UserUI;
@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public class NegativeUITests extends BaseTestUI {
+public class NegativeTestsUi extends BaseUiTest {
 
     UserSteps userSteps = new UserSteps();
     UserUI userUI = new UserUI();

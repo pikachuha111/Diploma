@@ -13,6 +13,8 @@ public class User {
 
     private String userId;
 
+    private String result;
+
     private List<BookIndentifiers> collectionOfIsbns;
 
 }

@@ -1,6 +1,6 @@
 package baseEntities;
 
-import adapters.BooksAdapter;
+import adapters.BookAdapter;
 import adapters.UserAdapter;
 import configuration.ReadProperties;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
@@ -19,9 +19,10 @@ import static io.restassured.RestAssured.given;
 
 public class BaseApiTest {
     protected UserAdapter userAdapter;
-    protected BooksAdapter booksAdapter;
+    protected BookAdapter bookAdapter;
     protected User user;
     protected User actualUser;
+    protected User incorrectUser;
     protected CollectionBooks collectionBooks;
 
     @BeforeTest
@@ -40,10 +41,11 @@ public class BaseApiTest {
                 .header(HTTP.CONTENT_TYPE, ContentType.JSON);
 
         userAdapter = new UserAdapter();
-        booksAdapter = new BooksAdapter();
+        bookAdapter = new BookAdapter();
         collectionBooks = new CollectionBooks();
         userAdapter.createUser(user);
         actualUser = userAdapter.logIn(user);
+        incorrectUser = new User();
 
         RestAssured.requestSpecification = given()
                 .auth().preemptive().basic(user.getUserName(), user.getPassword())

@@ -1,15 +1,22 @@
 package adapters;
 
 import io.restassured.mapper.ObjectMapperType;
+import io.restassured.response.Response;
 import models.User;
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.EndPoints;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class UserAdapter {
+    Logger logger = LogManager.getLogger(UserAdapter.class);
 
     public User createUser(User user) {
+
+        logger.info("Creating user ... ");
 
         return given()
                 .body(user, ObjectMapperType.GSON)
@@ -22,20 +29,12 @@ public class UserAdapter {
                 .as(User.class, ObjectMapperType.GSON);
     }
 
-//    public void generateToken(User user) {
-//        given()
-//                .body(user, ObjectMapperType.GSON)
-//                .when()
-//                .post(EndPoints.GENERATE_TOKEN_USER)
-//                .then()
-//                .statusCode(HttpStatus.SC_OK);
-//    }
-
     public User logIn(User user) {
+
+        logger.info("Logging user ... ");
 
         return given()
                 .body(user, ObjectMapperType.GSON)
-                .log().body()
                 .when()
                 .post(EndPoints.LOGIN_USER)
                 .then()
@@ -43,6 +42,22 @@ public class UserAdapter {
                 .log().body()
                 .extract()
                 .as(User.class, ObjectMapperType.GSON);
+    }
+
+    public void failedLogIn(User user) {
+
+        logger.info("Failing login method ... ");
+
+        String expectedResult = "User authorization failed.";
+
+        given()
+                .body(user, ObjectMapperType.GSON)
+                .when()
+                .post(EndPoints.GENERATE_TOKEN_USER)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .log().body()
+                .body("result", is(expectedResult));
     }
 
     public void authorized(User user) {

@@ -1,19 +1,16 @@
-package tests.UITests;
+package tests.gui;
 
-import baseEntities.BaseTestUI;
-import com.codeborne.selenide.Condition;
+import baseEntities.BaseUiTest;
 import models.HumanUI;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import steps.HumanSteps;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class LimitValuesTest extends BaseTestUI {
-    HumanSteps humanSteps = new HumanSteps();
+public class LimitValuesUiTest extends BaseUiTest {
 
     @Test
     public void minValueTest() {

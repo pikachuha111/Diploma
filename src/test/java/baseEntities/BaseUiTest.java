@@ -5,9 +5,12 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import configuration.ReadPropertiesUI;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.*;
+import steps.HumanSteps;
+
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
-public class BaseTestUI {
+public class BaseUiTest {
+    protected HumanSteps humanSteps;
 
     @BeforeSuite
     public void setUp() {
@@ -17,6 +20,9 @@ public class BaseTestUI {
         Configuration.baseUrl = ReadPropertiesUI.getUrl();
         Configuration.timeout = 20000;
         Configuration.pageLoadTimeout = 300000;
+
+        humanSteps = new HumanSteps();
+
     }
 
     @BeforeMethod
