@@ -2,7 +2,7 @@ package tests.gui;
 
 import baseEntities.BaseUiTest;
 import com.codeborne.selenide.Selenide;
-import configuration.ReadPropertiesUI;
+import configuration.ReadProperties;
 import models.UserUI;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -51,10 +51,10 @@ public class PositiveTestsUi extends BaseUiTest {
     @Test
     public void registerNewUserTest() throws InterruptedException {
         UserUI newUser = UserUI.builder()
-                .firstName(ReadPropertiesUI.firstName())
-                .lastName(ReadPropertiesUI.lastName())
-                .userName(ReadPropertiesUI.userName())
-                .password(ReadPropertiesUI.password())
+                .firstName(ReadProperties.firstName())
+                .lastName(ReadProperties.lastName())
+                .userName(ReadProperties.userName())
+                .password(ReadProperties.password())
                 .build();
 
         userSteps.registerNewUser(newUser);
@@ -68,10 +68,10 @@ public class PositiveTestsUi extends BaseUiTest {
     @Test
     public void deleteUserTest() throws InterruptedException {
         UserUI newUser = UserUI.builder()
-                .firstName(ReadPropertiesUI.firstName())
-                .lastName(ReadPropertiesUI.lastName())
-                .userName(ReadPropertiesUI.userName())
-                .password(ReadPropertiesUI.password())
+                .firstName(ReadProperties.firstName())
+                .lastName(ReadProperties.lastName())
+                .userName(ReadProperties.userName())
+                .password(ReadProperties.password())
                 .build();
 
         userSteps.registerNewUser(newUser);

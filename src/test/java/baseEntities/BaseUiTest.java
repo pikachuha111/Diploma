@@ -2,7 +2,7 @@ package baseEntities;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import configuration.ReadPropertiesUI;
+import configuration.ReadProperties;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.*;
 import steps.HumanSteps;
@@ -15,9 +15,9 @@ public class BaseUiTest {
     @BeforeSuite
     public void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        Configuration.browser = ReadPropertiesUI.browserName();
+        Configuration.browser = ReadProperties.browserName();
         Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = ReadPropertiesUI.getUrl();
+        Configuration.baseUrl = ReadProperties.getUrl();
         Configuration.timeout = 20000;
         Configuration.pageLoadTimeout = 300000;
 
