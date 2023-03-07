@@ -22,7 +22,7 @@ public class BookAdapter {
 
     public CollectionBooks getCollectionBooks() {
 
-        logger.info("Getting collection of books ... ");
+        logger.info("Getting collection of books method ... ");
 
         return given()
                 .when()
@@ -36,7 +36,7 @@ public class BookAdapter {
 
     public Book getByBookName(CollectionBooks collectionBooks, String bookName) {
 
-        logger.info("Getting book of collection by name ... ");
+        logger.info("Getting book of collection by name method ... ");
 
         String bookIdentifier = null;
         for (Book bookObject : collectionBooks.getBooks()) {
@@ -58,7 +58,7 @@ public class BookAdapter {
 
     public void addBook(User user, CollectionBooks collectionBooks, String bookName) {
 
-        logger.info("Adding book to User ... ");
+        logger.info("Adding book to User method ... ");
 
         List<BookIndentifiers> booksList = new ArrayList<>();
         for (Book bookObject : collectionBooks.getBooks()) {

@@ -32,6 +32,7 @@ public class BaseApiTest {
 
         try {
             user = mapper.readValue(new File("src/test/resources/testUser.json"), User.class);
+            incorrectUser = mapper.readValue(new File("src/test/resources/incorrectUser.json"), User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,14 +46,12 @@ public class BaseApiTest {
         collectionBooks = new CollectionBooks();
         userAdapter.createUser(user);
         actualUser = userAdapter.logIn(user);
-        incorrectUser = new User();
 
         RestAssured.requestSpecification = given()
                 .auth().preemptive().basic(user.getUserName(), user.getPassword())
                 .header(HTTP.CONTENT_TYPE, ContentType.JSON);
 
     }
-
 
     @AfterTest
     public void tearDown() {

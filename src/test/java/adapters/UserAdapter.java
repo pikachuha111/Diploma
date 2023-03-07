@@ -1,7 +1,6 @@
 package adapters;
 
 import io.restassured.mapper.ObjectMapperType;
-import io.restassured.response.Response;
 import models.User;
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +15,7 @@ public class UserAdapter {
 
     public User createUser(User user) {
 
-        logger.info("Creating user ... ");
+        logger.info("Creating user method... ");
 
         return given()
                 .body(user, ObjectMapperType.GSON)
@@ -31,7 +30,7 @@ public class UserAdapter {
 
     public User logIn(User user) {
 
-        logger.info("Logging user ... ");
+        logger.info("Logging user method... ");
 
         return given()
                 .body(user, ObjectMapperType.GSON)
@@ -60,17 +59,27 @@ public class UserAdapter {
                 .body("result", is(expectedResult));
     }
 
-    public void authorized(User user) {
+    public void failedAuthorizedUser(User user) {
+
+        logger.info("Failed authorized user method ...");
+
+        String message = "User not found!";
+
         given()
                 .body(user, ObjectMapperType.GSON)
                 .when()
                 .post(EndPoints.AUTHORIZED_USER)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
-                .log().body();
+                .statusCode(HttpStatus.SC_NOT_FOUND)
+                .log().body()
+                .body("message", is(message));
+
     }
 
     public void getUser(User user) {
+
+        logger.info("Get user method ...");
+
         given()
                 .pathParams("uuid", user.getUserId())
                 .when()
@@ -80,6 +89,9 @@ public class UserAdapter {
     }
 
     public void deleteUser(User user) {
+
+        logger.info("Delete user method ...");
+
         given()
                 .pathParams("uuid", user.getUserId())
                 .when()
@@ -89,7 +101,6 @@ public class UserAdapter {
                 .statusCode(HttpStatus.SC_NO_CONTENT);
 
     }
-
 
 
 }
