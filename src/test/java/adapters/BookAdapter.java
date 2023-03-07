@@ -6,19 +6,23 @@ import models.BookIndentifiers;
 import models.CollectionBooks;
 import models.User;
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.EndPoints;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class BooksAdapter {
+public class BookAdapter {
+    Logger logger = LogManager.getLogger(BookAdapter.class);
 
     private BookIndentifiers bookIndentifier = new BookIndentifiers();
 
     public CollectionBooks getCollectionBooks() {
+
+        logger.info("Getting collection of books method ... ");
 
         return given()
                 .when()
@@ -27,18 +31,22 @@ public class BooksAdapter {
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .as(CollectionBooks.class, ObjectMapperType.GSON);
+
     }
 
     public Book getByBookName(CollectionBooks collectionBooks, String bookName) {
-        String bookIdentifer = null;
+
+        logger.info("Getting book of collection by name method ... ");
+
+        String bookIdentifier = null;
         for (Book bookObject : collectionBooks.getBooks()) {
             if (bookObject.getTitle().equalsIgnoreCase(bookName.trim())) {
-                bookIdentifer = bookObject.getIsbn();
+                bookIdentifier = bookObject.getIsbn();
             }
         }
 
         return given()
-                .pathParams("isbn", bookIdentifer)
+                .pathParams("isbn", bookIdentifier)
                 .when()
                 .get(EndPoints.GET_BOOK)
                 .then()
@@ -49,6 +57,9 @@ public class BooksAdapter {
     }
 
     public void addBook(User user, CollectionBooks collectionBooks, String bookName) {
+
+        logger.info("Adding book to User method ... ");
+
         List<BookIndentifiers> booksList = new ArrayList<>();
         for (Book bookObject : collectionBooks.getBooks()) {
             if (bookObject.getTitle().equalsIgnoreCase(bookName.trim())) {

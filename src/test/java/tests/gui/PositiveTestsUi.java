@@ -1,6 +1,6 @@
-package tests.UITests;
+package tests.gui;
 
-import baseEntities.BaseTestUI;
+import baseEntities.BaseUiTest;
 import com.codeborne.selenide.Selenide;
 import configuration.ReadPropertiesUI;
 import models.UserUI;
@@ -17,7 +17,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class PositiveUITests extends BaseTestUI {
+public class PositiveTestsUi extends BaseUiTest {
     CheckBoxPage checkBoxPage = new CheckBoxPage();
     UserSteps userSteps = new UserSteps();
     ModalDialogPage modalDialogPage = new ModalDialogPage();
@@ -42,7 +42,7 @@ public class PositiveUITests extends BaseTestUI {
     @Test
     public void uploadFileTest() {
         uploadPage.goToUploadPage();
-        uploadPage.getChooseFileButton().uploadFile(new File("D:\\Programms\\Diploma\\Diploma_AQA_18_onl\\src\\test\\resources\\witcher.jpg"));
+        uploadPage.getChooseFileButton().uploadFile(new File("src/test/resources/witcher.jpg"));
         $(By.id("uploadedFilePath"))
                 .shouldBe(visible)
                 .shouldHave(text("C:\\fakepath\\witcher.jpg"));
