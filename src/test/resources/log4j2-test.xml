@@ -20,7 +20,6 @@
             <AppenderRef ref="File" />
         </Logger>
         <Root level="TRACE">
-            <!--AppenderRef ref="ConsoleAppender"/-->
             <AppenderRef ref="ConsoleAppender"/>
         </Root>
     </Loggers>

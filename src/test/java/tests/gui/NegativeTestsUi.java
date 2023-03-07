@@ -1,7 +1,7 @@
 package tests.gui;
 
 import baseEntities.BaseUiTest;
-import configuration.ReadPropertiesUI;
+import configuration.ReadProperties;
 import models.HumanUI;
 import models.UserUI;
 import org.openqa.selenium.By;
@@ -21,8 +21,8 @@ public class NegativeTestsUi extends BaseUiTest {
 
     @Test
     public void incorrectLoginTest() {
-        userUI.setUserName(ReadPropertiesUI.userName() + "f");
-        userUI.setPassword(ReadPropertiesUI.password());
+        userUI.setUserName(ReadProperties.userName() + "f");
+        userUI.setPassword(ReadProperties.password());
 
         userSteps.loginUser(userUI);
         $(By.id("name"))
@@ -47,8 +47,8 @@ public class NegativeTestsUi extends BaseUiTest {
 
     @Test
     public void defectTest() {
-        userUI.setUserName(ReadPropertiesUI.userName() + "f");
-        userUI.setPassword(ReadPropertiesUI.password());
+        userUI.setUserName(ReadProperties.userName() + "f");
+        userUI.setPassword(ReadProperties.password());
 
         userSteps.loginUser(userUI);
         $(By.id("name"))
