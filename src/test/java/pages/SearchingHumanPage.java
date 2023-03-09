@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class SearchingHumanPage {
-    private String searchingHumanPageUrl = ReadProperties.getUrl() + "peoples";
+    private String searchingHumanPageUrl = "https://namebook.club/peoples";
     private SelenideElement firstNameInput = $(By.id("first_name"));
     private SelenideElement lastNameInput = $(By.id("last_name"));
     private SelenideElement countryInput = $(By.id("country"));
