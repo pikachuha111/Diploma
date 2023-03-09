@@ -10,7 +10,7 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public class BaseUiTest {
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.browser = ReadProperties.browserName();
@@ -20,9 +20,9 @@ public class BaseUiTest {
         Configuration.pageLoadTimeout = 300000;
     }
 
-    @BeforeMethod
-    public void start() {
-    }
+//    @BeforeMethod
+//    public void start() {
+//    }
 
     @AfterMethod
     public void tearDown() {
