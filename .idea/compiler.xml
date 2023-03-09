@@ -10,5 +10,8 @@
         <module name="diploma" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="diploma" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,26 +1,29 @@
 package tests.api;
 
 import baseEntities.BaseApiTest;
+import models.CollectionBooks;
 import org.testng.annotations.Test;
 
-public class BookTests extends BaseApiTest {
 
-    @Test(priority = 1)
+public class BookTests extends BaseApiTest {
+    protected CollectionBooks collectionBooks = new CollectionBooks();
+
+    @Test
     public void getCollectionBooksTest() {
         collectionBooks = bookAdapter.getCollectionBooks();
     }
 
-    @Test(priority = 2)
+    @Test(dependsOnMethods = "getCollectionBooksTest")
     public void getBookByNameTest() {
-        bookAdapter.getByBookName(collectionBooks, "git Pocket Guide");
+        bookAdapter.getBookByName(collectionBooks, "git Pocket Guide");
     }
 
-    @Test( priority = 3)
+    @Test(dependsOnMethods = "getCollectionBooksTest")
     public void addBookToUserTest() {
-        bookAdapter.addBook(actualUser, collectionBooks, "git Pocket Guide");
+        bookAdapter.addBookToUser(actualUser, collectionBooks, "git Pocket Guide");
     }
 
-    @Test(priority = 4)
+    @Test(dependsOnMethods = "addBookToUserTest")
     public void getUserTest() {
         userAdapter.getUser(actualUser);
     }

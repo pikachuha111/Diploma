@@ -12,7 +12,7 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 public class BaseUiTest {
     protected HumanSteps humanSteps;
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         Configuration.browser = ReadProperties.browserName();
@@ -25,9 +25,9 @@ public class BaseUiTest {
 
     }
 
-    @BeforeMethod
-    public void start() {
-    }
+//    @BeforeMethod
+//    public void start() {
+//    }
 
     @AfterMethod
     public void tearDown() {
