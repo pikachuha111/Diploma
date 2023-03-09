@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import configuration.ReadProperties;
 import lombok.Getter;
 import org.openqa.selenium.By;
 

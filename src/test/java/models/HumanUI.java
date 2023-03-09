@@ -2,8 +2,6 @@ package models;
 
 import lombok.*;
 
-import static com.codeborne.selenide.Selenide.$;
-
 @Data
 @Builder
 @NoArgsConstructor

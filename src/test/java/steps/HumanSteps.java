@@ -1,7 +1,11 @@
 package steps;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import models.HumanUI;
 import pages.SearchingHumanPage;
+
+import java.time.Duration;
 
 public class HumanSteps {
     SearchingHumanPage searchingHumanPage = new SearchingHumanPage();
