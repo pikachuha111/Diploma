@@ -17,7 +17,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class PositiveTestsUi extends BaseUiTest {
+public class PositiveUiTests extends BaseUiTest {
     CheckBoxPage checkBoxPage = new CheckBoxPage();
     UserSteps userSteps = new UserSteps();
     ModalDialogPage modalDialogPage = new ModalDialogPage();

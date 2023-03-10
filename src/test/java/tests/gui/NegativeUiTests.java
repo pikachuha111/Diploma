@@ -12,7 +12,7 @@ import steps.UserSteps;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class NegativeTestsUi extends BaseUiTest {
+public class NegativeUiTests extends BaseUiTest {
 
     UserSteps userSteps = new UserSteps();
     UserUI userUI = new UserUI();
