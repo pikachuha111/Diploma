@@ -1,77 +1,47 @@
 package tests.gui;
 
 import baseEntities.BaseUiTest;
-import models.HumanUI;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import steps.HumanSteps;
+import pages.TextBoxPage;
+import steps.TextBoxSteps;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
 
 
 public class LimitValuesUiTest extends BaseUiTest {
 
-    HumanSteps humanSteps = new HumanSteps();
+    TextBoxSteps textBoxSteps = new TextBoxSteps();
+    TextBoxPage textBoxPage = new TextBoxPage();
+    private String email = "example@gmail.com";
 
     @Test
-    public void minValueTest() {
-        HumanUI humanUI = HumanUI.builder()
-                .firstName("Василий")
-                .lastName("Васильев")
-                .country("Беларусь")
-                .birthYear("1000")
-                .build();
-
-        humanSteps.startSearching(humanUI);
-        $(By.xpath("//span[text()='Результат поиска по базе данных людей']"))
+    public void maxDomainLength() {
+        textBoxSteps.fillTheEmail(email);
+        textBoxPage.getEmailText()
                 .shouldBe(visible)
-                .shouldHave(text("Результат поиска по базе данных людей"));
+                .shouldHave(text("Email:example@gmail.com"));
     }
 
     @Test
-    public void maxValueTest() {
-        HumanUI humanUI = HumanUI.builder()
-                .firstName("Василий")
-                .lastName("Васильев")
-                .country("Беларусь")
-                .birthYear("9999")
-                .build();
-
-        humanSteps.startSearching(humanUI);
-        $(By.xpath("//span[text()='Результат поиска по базе данных людей']"))
+    public void minDomainLength() {
+        textBoxSteps.fillTheEmail(email.substring(0, 16));
+        textBoxPage.getEmailText()
                 .shouldBe(visible)
-                .shouldHave(text("Результат поиска по базе данных людей"));
+                .shouldHave(text("Email:example@gmail.co"));
     }
 
     @Test
-    public void minValueTestPlusOne() {
-        HumanUI humanUI = HumanUI.builder()
-                .firstName("Василий")
-                .lastName("Васильев")
-                .country("Беларусь")
-                .birthYear("10000")
-                .build();
-
-        humanSteps.startSearching(humanUI);
-        $(By.id("error"))
-                .shouldBe(visible)
-                .shouldHave(text("Нужно указать год рождения состоящий из четырех цифр."));
+    public void maxMinusOneDomainLength() {
+        textBoxSteps.fillTheEmail(email + "m");
+        textBoxPage.getEmailText()
+                .shouldNotBe(visible);
     }
 
     @Test
-    public void minValueTestMinusOne() {
-        HumanUI humanUI = HumanUI.builder()
-                .firstName("Василий")
-                .lastName("Васильев")
-                .country("Беларусь")
-                .birthYear("999")
-                .build();
-
-        humanSteps.startSearching(humanUI);
-        $(By.id("error"))
-                .shouldBe(visible)
-                .shouldHave(text("Нужно указать год рождения состоящий из четырех цифр."));
+    public void minMinusOneDomainLength() {
+        textBoxSteps.fillTheEmail(email.substring(0, 15));
+        textBoxPage.getEmailText()
+                .shouldNotBe(visible);
     }
+
 }

@@ -70,7 +70,7 @@ public class PositiveTestsUi extends BaseUiTest {
         UserUI newUser = UserUI.builder()
                 .firstName(ReadProperties.firstName())
                 .lastName(ReadProperties.lastName())
-                .userName(ReadProperties.userName())
+                .userName(ReadProperties.userName() + "1")
                 .password(ReadProperties.password())
                 .build();
 
