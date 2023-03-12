@@ -12,6 +12,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="diploma" target="11" />
       <module name="Diploma_AQA_18_onl" target="11" />
     </bytecodeTargetLevel>
   </component>
