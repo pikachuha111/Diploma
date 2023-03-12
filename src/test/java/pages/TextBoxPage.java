@@ -16,8 +16,6 @@ public class TextBoxPage {
     private SelenideElement emailText = $(By.id("email"));
     private SelenideElement submitButton = $(By.id("submit"));
 
-
-
     public void goToTextBoxPage() {
         Selenide.open(TextBoxPageUrl);
     }

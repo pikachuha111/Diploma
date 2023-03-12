@@ -14,7 +14,4 @@ public class ProfilePage {
     private SelenideElement deleteButton = $(By.xpath("//button[text()='Delete Account']"));
     private SelenideElement modalWindowOKButton = $(By.id("closeSmallModal-ok"));
 
-    public void goToProfilePage() {
-        Selenide.open(profilePageUrl);
-    }
 }

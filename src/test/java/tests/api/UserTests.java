@@ -16,7 +16,7 @@ public class UserTests extends BaseApiTest {
         userAdapter.failedAuthorizedUser(incorrectUser);
     }
 
-    @Test (description = "POST authorization by secure data", enabled = false)
+    @Test (description = "POST authorization by secure data")
     public void adminAuthorization() {
         User admin = new User();
         admin.setUserName(System.getProperty("adminLogin"));

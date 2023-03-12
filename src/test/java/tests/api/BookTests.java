@@ -8,12 +8,12 @@ import org.testng.annotations.Test;
 public class BookTests extends BaseApiTest {
     protected CollectionBooks collectionBooks = new CollectionBooks();
 
-    @Test (description = "GET collection of books")
+    @Test(description = "GET collection of books")
     public void getCollectionBooksTest() {
         collectionBooks = bookAdapter.getCollectionBooks();
     }
 
-    @Test(description = "GET book by name",dependsOnMethods = "getCollectionBooksTest")
+    @Test(description = "GET book by name", dependsOnMethods = "getCollectionBooksTest")
     public void getBookByNameTest() {
         bookAdapter.getBookByName(collectionBooks, "git Pocket Guide");
     }

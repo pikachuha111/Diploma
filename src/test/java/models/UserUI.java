@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserUI {
+
     private String firstName;
     private String lastName;
     private String userName;

@@ -23,7 +23,7 @@ public class UserSteps {
         registerPage.getRegisterButton().scrollTo().click();
     }
 
-    @Step ("user log in")
+    @Step("user log in")
     public void loginUser(UserUI userUI) {
         loginPage.goToLoginPage();
         loginPage.getLoginInput().val(userUI.getUserName());
@@ -31,7 +31,7 @@ public class UserSteps {
         loginPage.getLoginButton().scrollTo().click();
     }
 
-    @Step ("delete user")
+    @Step("delete user")
     public void deleteUser() {
         profilePage.getDeleteButton().scrollTo().click();
         profilePage.getModalWindowOKButton().click();

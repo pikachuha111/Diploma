@@ -58,7 +58,6 @@ public class PositiveUiTests extends BaseUiTest {
                 .build();
 
         userSteps.registerNewUser(newUser);
-        //капчу прохожу вручную
 
         String alertText = Selenide.switchTo().alert().getText();
         Assert.assertEquals(alertText, "User Register Successfully.");
@@ -75,7 +74,6 @@ public class PositiveUiTests extends BaseUiTest {
                 .build();
 
         userSteps.registerNewUser(newUser);
-        //капчу прохожу вручную
         Selenide.switchTo().alert().accept();
 
         userSteps.loginUser(newUser);

@@ -1,5 +1,6 @@
 package baseEntities;
 
+import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import configuration.ReadProperties;
