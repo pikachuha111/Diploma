@@ -6,7 +6,6 @@ import configuration.ReadProperties;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import models.CollectionBooks;
 import models.User;
 import org.apache.http.protocol.HTTP;
 import org.testng.annotations.*;
