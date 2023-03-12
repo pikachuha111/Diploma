@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import models.UserUI;
 import pages.LoginPage;
 import pages.ProfilePage;
@@ -10,6 +11,7 @@ public class UserSteps {
     LoginPage loginPage = new LoginPage();
     ProfilePage profilePage = new ProfilePage();
 
+    @Step("registration of new user")
     public void registerNewUser(UserUI userUI) throws InterruptedException {
         registerPage.goToRegisterPage();
         Thread.sleep(3000);
@@ -21,6 +23,7 @@ public class UserSteps {
         registerPage.getRegisterButton().scrollTo().click();
     }
 
+    @Step ("user log in")
     public void loginUser(UserUI userUI) {
         loginPage.goToLoginPage();
         loginPage.getLoginInput().val(userUI.getUserName());
@@ -28,6 +31,7 @@ public class UserSteps {
         loginPage.getLoginButton().scrollTo().click();
     }
 
+    @Step ("delete user")
     public void deleteUser() {
         profilePage.getDeleteButton().scrollTo().click();
         profilePage.getModalWindowOKButton().click();
