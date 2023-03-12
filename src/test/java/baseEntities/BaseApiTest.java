@@ -9,10 +9,7 @@ import io.restassured.http.ContentType;
 import models.CollectionBooks;
 import models.User;
 import org.apache.http.protocol.HTTP;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +23,7 @@ public class BaseApiTest {
     protected User actualUser;
     protected User incorrectUser;
 
-    @BeforeMethod
+    @BeforeClass
     public void setupApi() {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -53,8 +50,8 @@ public class BaseApiTest {
 
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
-        userAdapter.deleteUser(actualUser); // сам сайт при удалении пользователя возвращает 204, пользователь удаляется но это несоответсвие спеки swagger, на удивление postman отдает 200, если повторить те же действия
+        userAdapter.deleteUser(actualUser);
     }
 }
