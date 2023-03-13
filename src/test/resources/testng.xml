@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Main Suite">
+    <test name="Regression">
+        <classes>
+            <class name="tests.api.BookTests"/>
+            <class name="tests.api.UserTests"/>
+            <class name="tests.gui.LimitValuesUiTest"/>
+            <class name="tests.gui.NegativeUiTests"/>
+            <class name="tests.gui.PositiveUiTests"/>
+        </classes>
+    </test>
+</suite>
