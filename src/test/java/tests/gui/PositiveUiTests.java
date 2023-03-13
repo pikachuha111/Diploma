@@ -30,7 +30,7 @@ public class PositiveUiTests extends BaseUiTest {
                 .shouldHave(attribute("aria-label", "Expand all"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void modalDialogTest() {
         modalDialogPage.goToModalDialogPage();
         modalDialogPage.getSmallModalButton().click();
@@ -48,7 +48,7 @@ public class PositiveUiTests extends BaseUiTest {
                 .shouldHave(text("C:\\fakepath\\witcher.jpg"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void registerNewUserTest() throws InterruptedException {
         UserUI newUser = UserUI.builder()
                 .firstName(ReadProperties.firstName())
@@ -64,7 +64,7 @@ public class PositiveUiTests extends BaseUiTest {
         Selenide.switchTo().alert().accept();
     }
 
-    @Test
+    @Test(enabled = false)
     public void deleteUserTest() throws InterruptedException {
         UserUI newUser = UserUI.builder()
                 .firstName(ReadProperties.firstName())

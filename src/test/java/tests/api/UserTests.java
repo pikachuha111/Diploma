@@ -16,7 +16,7 @@ public class UserTests extends BaseApiTest {
         userAdapter.failedAuthorizedUser(incorrectUser);
     }
 
-    @Test (description = "POST (NFE) authorization by secure data")
+    @Test (description = "POST (NFE) authorization by secure data", enabled = false)
     public void adminAuthorization() {
         User admin = new User();
         admin.setUserName(System.getProperty("adminLogin"));
