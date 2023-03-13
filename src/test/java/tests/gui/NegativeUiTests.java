@@ -40,7 +40,7 @@ public class NegativeUiTests extends BaseUiTest {
                 .shouldHave(value(userNumber));
     }
 
-    @Test(enabled = false)
+    @Test
     public void defectTest() {
         userUI.setUserName(ReadProperties.userName() + "f");
         userUI.setPassword(ReadProperties.password());
